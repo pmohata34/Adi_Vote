@@ -9,6 +9,7 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../lib/firebase";
 import { toast } from "sonner";
+import { getFunctions, httpsCallable } from 'firebase/functions';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -61,6 +62,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [verificationEmail, setVerificationEmail] = useState("");
   const [currentOTP, setCurrentOTP] = useState("");
 
+  const functions = getFunctions();
+  const sendOTPEmail = httpsCallable(functions, 'sendOTPEmail');
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -89,28 +93,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       // Validate email domain
       if (!isValidStudentEmail(email) && !isValidFacultyEmail(email)) {
-        toast.error("Please use your college email address (@stu.adamasuniversity.ac.in or @adamasuniversity.ac.in)");
+        toast.error("Please use your college email address");
         return false;
       }
 
-      // Store the email for verification
-      setVerificationEmail(email);
-      
       // Generate OTP
       const otp = generateOTP();
       setCurrentOTP(otp);
       
-      // TODO: In a real application, you would send this OTP to the user's email
-      // For demo purposes, we'll show it in the console
-      console.log(`OTP for ${email}: ${otp}`);
+      // Send OTP via Cloud Function with error handling
+      const result = await sendOTPEmail({ email, otp });
+      
+      if (!result.data?.success) {
+        throw new Error('Failed to send email');
+      }
+      
+      // Store email for verification
+      setVerificationEmail(email);
+      setEmailVerificationStep(1);
       toast.success(`Verification code sent to ${email}`);
       
-      // Move to OTP verification step
-      setEmailVerificationStep(1);
       return true;
-    } catch (error) {
-      console.error("Error initiating email verification:", error);
-      toast.error("Failed to initiate verification. Please try again.");
+    } catch (error: any) {
+      console.error("Error sending verification email:", error);
+      toast.error(error.message || "Failed to send verification code");
       return false;
     }
   };

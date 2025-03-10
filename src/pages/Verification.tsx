@@ -1,21 +1,48 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { LogIn, Loader2, Mail } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 
 const Verification = () => {
-  const { currentUser, signInWithGoogle, loading } = useAuth();
+  const { currentUser, loading, initiateEmailVerification, emailVerificationStep } = useAuth();
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   
   // Redirect if already logged in
   useEffect(() => {
     if (currentUser) {
       navigate("/voting");
+    } else if (emailVerificationStep === 1) {
+      navigate("/otp-verification");
+    } else if (emailVerificationStep === 2) {
+      navigate("/voting");
     }
-  }, [currentUser, navigate]);
+  }, [currentUser, emailVerificationStep, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      const success = await initiateEmailVerification(email);
+      if (success) {
+        navigate("/otp-verification");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
@@ -31,22 +58,40 @@ const Verification = () => {
         </div>
         
         <div className="bg-white rounded-xl p-6 md:p-8 shadow-md border border-gray-100 animate-scale-in" style={{ animationDelay: "200ms" }}>
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <h2 className="text-xl font-medium">Get Started</h2>
               <p className="text-sm text-muted-foreground">
-                Sign in with your college email address to verify your eligibility to vote.
+                Enter your college email address to verify your eligibility to vote.
               </p>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">College Email</Label>
+                <Input
+                  id="email"
+                  placeholder="youremail@stu.adamasuniversity.ac.in"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  autoComplete="email"
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  Use your college email ending with @stu.adamasuniversity.ac.in or @adamasuniversity.ac.in
+                </p>
+              </div>
             </div>
             
             <div className="border-t border-gray-100 pt-6">
               <Button
-                onClick={signInWithGoogle}
+                type="submit"
                 size="lg"
                 className="w-full btn-hover shadow-sm"
-                disabled={loading}
+                disabled={isSubmitting}
               >
-                {loading ? (
+                {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                     Verifying...
@@ -54,16 +99,12 @@ const Verification = () => {
                 ) : (
                   <>
                     <LogIn className="mr-2 h-5 w-5" />
-                    Continue with Google
+                    Continue with Email
                   </>
                 )}
               </Button>
-              
-              <p className="text-xs text-muted-foreground mt-4 text-center">
-                Note: You must use your college email address to verify your identity.
-              </p>
             </div>
-          </div>
+          </form>
         </div>
         
         <div className="mt-8 space-y-4">
