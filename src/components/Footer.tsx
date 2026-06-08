@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
               CR
             </div>
-            <span className="text-sm font-medium">VoteVolution</span>
+            <span className="text-sm font-medium">Adamas CR Vote</span>
           </div>
           
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
@@ -29,7 +29,7 @@ const Footer = () => {
             <div className="h-4 w-px bg-gray-200 hidden md:block" />
             
             <div className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} College CR Election. All rights reserved.
+              © {new Date().getFullYear()} Adamas CR Voting System. All rights reserved.
             </div>
           </div>
         </div>

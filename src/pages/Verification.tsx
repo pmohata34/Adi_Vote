@@ -53,7 +53,7 @@ const Verification = () => {
           </div>
           <h1 className="text-3xl font-bold animate-slide-up">Student Verification</h1>
           <p className="text-muted-foreground mt-3 animate-slide-up" style={{ animationDelay: "100ms" }}>
-            Verify your identity using your college email account to participate in the CR election.
+            Verify your identity using your Adamas University email account to participate in the Adamas CR election.
           </p>
         </div>
         
@@ -62,7 +62,7 @@ const Verification = () => {
             <div className="space-y-2">
               <h2 className="text-xl font-medium">Get Started</h2>
               <p className="text-sm text-muted-foreground">
-                Enter your college email address to verify your eligibility to vote.
+                Enter your Adamas University email address to verify your eligibility to vote.
               </p>
             </div>
             
@@ -79,7 +79,7 @@ const Verification = () => {
                   required
                 />
                 <p className="text-xs text-muted-foreground">
-                  Use your college email ending with @stu.adamasuniversity.ac.in or @adamasuniversity.ac.in
+                  Use your Adamas University email ending with @stu.adamasuniversity.ac.in or @adamasuniversity.ac.in
                 </p>
               </div>
             </div>

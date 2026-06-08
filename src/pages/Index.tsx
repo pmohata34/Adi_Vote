@@ -55,12 +55,12 @@ const Index = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight animate-slide-up">
-              College CR Election
+              Adamas CR Voting System
               <span className="text-primary">.</span>
             </h1>
             
             <p className="mt-6 text-lg text-muted-foreground animate-slide-up" style={{ animationDelay: "100ms" }}>
-              Cast your vote for the next Class Representative in our secure and transparent online voting system.
+              Cast your vote for the next Adamas University Class Representative in our secure and transparent online voting system.
             </p>
             
             <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8 animate-slide-up" style={{ animationDelay: "200ms" }}>
@@ -136,7 +136,7 @@ const Index = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold">How It Works</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Our CR voting system provides a seamless, secure experience for electing your class representative.
+            Our Adamas CR voting system provides a seamless, secure experience for electing your class representative.
           </p>
         </div>
         
@@ -144,7 +144,7 @@ const Index = () => {
           {[
             {
               title: "Verify Your Identity",
-              description: "Sign in with your college email to get verified as an eligible voter.",
+              description: "Sign in with your Adamas University email to get verified as an eligible voter.",
               icon: "👤",
               delay: 0
             },

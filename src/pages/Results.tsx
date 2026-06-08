@@ -104,8 +104,8 @@ const Results = () => {
           <h1 className="text-3xl font-bold animate-slide-up">Election Results</h1>
           <p className="text-muted-foreground mt-2 max-w-xl mx-auto animate-slide-up" style={{ animationDelay: "100ms" }}>
             {electionEnded 
-              ? "The CR election has concluded. View the final results below." 
-              : "View the current standings in the CR election. Results are updated in real-time."}
+              ? "The Adamas CR election has concluded. View the final results below." 
+              : "View the current standings in the Adamas CR election. Results are updated in real-time."}
           </p>
         </div>
         

@@ -268,7 +268,7 @@ const Admin = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Admin Panel</h1>
           <p className="text-muted-foreground mt-2">
-            Manage the CR election, candidates, and view voting statistics
+            Manage the Adamas CR election, candidates, and view voting statistics
           </p>
         </div>
         
@@ -363,7 +363,7 @@ const Admin = () => {
               <CardHeader>
                 <CardTitle>Add New Candidate</CardTitle>
                 <CardDescription>
-                  Create a new candidate for the CR election
+                  Create a new candidate for the Adamas CR election
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -588,7 +588,7 @@ const Admin = () => {
               <CardHeader>
                 <CardTitle>Election Results</CardTitle>
                 <CardDescription>
-                  Current standings in the CR election
+                  Current standings in the Adamas CR election
                 </CardDescription>
               </CardHeader>
               <CardContent>

@@ -33,7 +33,7 @@ const Header = () => {
             <div className="relative w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold">
               <span className="animate-scale-in">CR</span>
             </div>
-            <span className="font-semibold text-lg tracking-tight">VoteVolution</span>
+            <span className="font-semibold text-lg tracking-tight">Adamas CR Vote</span>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-6">
